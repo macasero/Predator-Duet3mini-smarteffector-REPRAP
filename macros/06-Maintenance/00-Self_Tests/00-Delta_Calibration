@@ -1,0 +1,18 @@
+; =========================================================================================================
+; Test Routine for Duet WiFi
+; Part of self check
+;
+; =========================================================================================================
+;
+if {state.status == "processing"} || {state.status == "paused"}        ; printer is not currently printing!
+    M291 P"Cannot run during an ongoing print. Please run this macro when the printer is not printing!" R"WARNING!" S2
+    M99
+;
+M291 P"Delta Calibration (G32)." R" Press OK to continue or CANCEL to abort." S3
+;
+G32                               ; run bed.g
+;
+M291 P"Save Delta Calibration?" R" Press OK to continue or CANCEL to abort." S3
+;
+M500                            ; Probe the bed, save the height map in a file on the SD card
+; =========================================================================================================
