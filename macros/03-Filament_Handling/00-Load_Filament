@@ -20,8 +20,7 @@ if heat.heaters[1].current < heat.coldExtrudeTemperature               ; check e
         M99
 ;
 if !move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed
-    set global.zLiftDistance = 15                                      ; set distance to lift
-    M98 P"0:/sys/00-Functions/zLift"                                   ; call macro to lift z
+    G28
 else
     G90                                                                ; set absolute positioning
     if  {move.axes[2].machinePosition < 80}                            ; if z position is below 80mm
